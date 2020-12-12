@@ -1,0 +1,6 @@
+*.swp
+*.swo
+
+bin/
+
+data/*_input.txt
