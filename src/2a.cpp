@@ -42,8 +42,7 @@ int main() {
 
 	const int count = std::count_if(entries.begin(), entries.end(),
 		[](const std::string& entry) {
-			const PolicyCase policy_case(entry);
-			return policy_case.IsValid();
+			return PolicyCase(entry).IsValid();
 		});
 	std::cout << count << std::endl;
 
