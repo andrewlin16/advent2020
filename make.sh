@@ -7,4 +7,9 @@ if [[ $# -lt 1 ]] ; then
 	exit 1
 fi
 
-g++ -std=c++20 "src/$1.cpp" -o "bin/$1"
+srcfile="src/$1.cpp"
+binfile="bin/$1"
+
+grep -q "#include <util.h>" "${srcfile}" && utilargs="-Isrc src/util.cpp" || utilargs=""
+
+g++ -std=c++20 ${utilargs} "${srcfile}" -o "${binfile}"
