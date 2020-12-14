@@ -30,7 +30,7 @@ struct Tracker {
 };
 
 int main() {
-	const std::vector<std::string> input = util::read_input();
+	const std::vector<std::string> input = util::ReadInput();
 
 	const int width = input[0].size();
 	std::array<Tracker, 5> trackers = {

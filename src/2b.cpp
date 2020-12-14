@@ -38,7 +38,7 @@ struct PolicyCase {
 };
 
 int main() {
-	const std::vector<std::string> entries = util::read_input();
+	const std::vector<std::string> entries = util::ReadInput();
 
 	const int count = std::count_if(entries.begin(), entries.end(),
 		[](const std::string& entry) {

@@ -5,7 +5,7 @@
 #include <util.h>
 
 int main() {
-	const std::vector<std::string> input = util::read_input();
+	const std::vector<std::string> input = util::ReadInput();
 
 	const int width = input[0].size();
 	int col = 0;

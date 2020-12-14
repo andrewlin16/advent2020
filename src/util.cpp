@@ -4,7 +4,7 @@
 
 namespace util {
 
-const std::vector<std::string> read_input() {
+const std::vector<std::string> ReadInput() {
 	std::vector<std::string> input;
 	std::string line;
 
