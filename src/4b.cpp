@@ -74,8 +74,8 @@ const std::unordered_map<std::string, Validator>
 	};
 
 int main() {
-	int num_valid = 0;
-	int passport_num_valid = 0;
+	unsigned int num_valid = 0;
+	unsigned int passport_num_valid = 0;
 	std::string line;
 
 	while (std::getline(std::cin, line)) {
