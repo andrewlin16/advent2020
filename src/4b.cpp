@@ -2,10 +2,14 @@
 #include <cctype>
 #include <functional>
 #include <iostream>
+#include <iterator>
 #include <sstream>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
+
+#include <util.h>
 
 typedef std::function<bool(const std::string&)> Validator;
 
@@ -74,17 +78,13 @@ const std::unordered_map<std::string, Validator>
 	};
 
 int main() {
+	const std::vector<std::vector<std::string>> input = util::ReadInputGroups();
 	unsigned int num_valid = 0;
-	unsigned int passport_num_valid = 0;
-	std::string line;
 
-	while (std::getline(std::cin, line)) {
-		if (line.empty()) {
-			if (passport_num_valid == kValidators.size()) {
-				num_valid++;
-			}
-			passport_num_valid = 0;
-		} else {
+	for (const std::vector<std::string>& group : input) {
+		unsigned int passport_num_valid = 0;
+
+		for (const std::string& line : group) {
 			std::istringstream ss(line);
 			std::for_each(
 				std::istream_iterator<std::string>(ss),
@@ -102,10 +102,10 @@ int main() {
 					}
 				});
 		}
-	}
 
-	if (passport_num_valid == kValidators.size()) {
-		num_valid++;
+		if (passport_num_valid == kValidators.size()) {
+			num_valid++;
+		}
 	}
 
 	std::cout << num_valid << std::endl;

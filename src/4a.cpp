@@ -3,6 +3,9 @@
 #include <set>
 #include <sstream>
 #include <string>
+#include <vector>
+
+#include <util.h>
 
 const std::set<std::string> kRequiredFields = {
 	"byr",
@@ -20,17 +23,13 @@ bool IsValid(const std::set<std::string>& passport) {
 }
 
 int main() {
+	const std::vector<std::vector<std::string>> input = util::ReadInputGroups();
 	int num_valid = 0;
-	std::string line;
-	std::set<std::string> passport;
 
-	while (std::getline(std::cin, line)) {
-		if (line.empty()) {
-			if (IsValid(passport)) {
-				num_valid++;
-			}
-			passport.clear();
-		} else {
+	for (const std::vector<std::string>& group : input) {
+		std::set<std::string> passport;
+
+		for (const std::string& line : group) {
 			std::istringstream ss(line);
 			std::for_each(
 				std::istream_iterator<std::string>(ss),
@@ -39,10 +38,10 @@ int main() {
 					passport.insert(s.substr(0, 3));
 				});
 		}
-	}
 
-	if (IsValid(passport)) {
-		num_valid++;
+		if (IsValid(passport)) {
+			num_valid++;
+		}
 	}
 
 	std::cout << num_valid << std::endl;
