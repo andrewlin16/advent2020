@@ -32,7 +32,8 @@ struct PolicyCase {
 	}
 
 	bool IsValid() const {
-		return password[pos_a - 1] == letter ^ password[pos_b - 1] == letter;
+		return (password[pos_a - 1] == letter) ^
+			(password[pos_b - 1] == letter);
 	}
 };
 
