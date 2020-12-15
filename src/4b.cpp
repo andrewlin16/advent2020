@@ -11,7 +11,7 @@
 
 #include <util.h>
 
-typedef std::function<bool(const std::string&)> Validator;
+using Validator = std::function<bool(const std::string&)>;
 
 Validator year_validator(int lower, int upper) {
 	return [lower, upper](const std::string& s ) {
