@@ -12,4 +12,4 @@ binfile="bin/$1"
 
 grep -q "#include <util.h>" "${srcfile}" && utilargs="-Isrc src/util.cpp" || utilargs=""
 
-g++ -Wall -std=c++20 ${utilargs} "${srcfile}" -o "${binfile}"
+g++ -Wall -O2 -std=c++20 ${utilargs} "${srcfile}" -o "${binfile}"
