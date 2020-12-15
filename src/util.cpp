@@ -9,7 +9,7 @@ const std::vector<std::string> ReadInput() {
 	std::string line;
 
 	while (std::getline(std::cin, line)) {
-		input.emplace_back(std::move(line));
+		input.push_back(std::move(line));
 	}
 
 	return input;
@@ -22,14 +22,14 @@ const std::vector<std::vector<std::string>> ReadInputGroups() {
 
 	while (std::getline(std::cin, line)) {
 		if (line.empty()) {
-			input.emplace_back(std::move(group));
+			input.push_back(std::move(group));
 			group.clear();
 		} else {
-			group.emplace_back(std::move(line));
+			group.push_back(std::move(line));
 		}
 	}
 
-	input.emplace_back(std::move(group));
+	input.push_back(std::move(group));
 	return input;
 }
 
