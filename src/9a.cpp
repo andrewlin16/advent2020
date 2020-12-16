@@ -19,20 +19,20 @@ int main() {
 	}
 
 	for (auto iter = data.begin() + kPreambleSize; iter != data.end(); ++iter) {
-		const long head_num = *iter;
-		if (!sums.contains(head_num)) {
-			std::cout << head_num << std::endl;
+		const long tail_num = *iter;
+		if (!sums.contains(tail_num)) {
+			std::cout << tail_num << std::endl;
 			return 0;
 		}
 
-		const long tail_num = *(iter - kPreambleSize);
+		const long head_num = *(iter - kPreambleSize);
 		for (int i = 1; i < kPreambleSize; ++i) {
 			const long history_num = *(iter - kPreambleSize + i);
-			const long tail_sum = tail_num + history_num;
 			const long head_sum = head_num + history_num;
+			const long tail_sum = tail_num + history_num;
 
-			sums.extract(tail_sum);
-			sums.insert(head_sum);
+			sums.extract(head_sum);
+			sums.insert(tail_sum);
 		}
 	}
 
