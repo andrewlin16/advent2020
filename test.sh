@@ -7,4 +7,8 @@ if [[ $# -lt 1 ]] ; then
 	exit 1
 fi
 
-diff "data/$1_sample-output.txt" <(bin/$1 < "data/$1_sample-input.txt") && echo "pass" || echo "fail"
+for infile in data/$1_sample-input*.txt; do
+	echo "${infile}"
+	outfile="${infile/input/output}"
+	diff "${outfile}" <(bin/$1 < "${infile}") && echo "pass" || echo "fail"
+done
