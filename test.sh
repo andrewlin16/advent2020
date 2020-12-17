@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -eu
+shopt -s failglob
 
 if [[ $# -lt 1 ]] ; then
 	echo "Usage: $0 <name>"
