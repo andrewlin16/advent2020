@@ -8,9 +8,9 @@
 
 const std::array<std::pair<int, int>, 4> kDirections = {{
 	{+1,  0},
-	{ 0, -1},
-	{-1,  0},
 	{ 0, +1},
+	{-1,  0},
+	{ 0, -1},
 }};
 
 int main() {
@@ -26,10 +26,10 @@ int main() {
 
 		switch (action) {
 			case 'N':
-				y -= value;
+				y += value;
 				break;
 			case 'S':
-				y += value;
+				y -= value;
 				break;
 			case 'E':
 				x += value;
