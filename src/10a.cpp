@@ -15,9 +15,9 @@ int main() {
 		const int diff = value - joltage;
 
 		if (diff == 1) {
-			count_1++;
+			++count_1;
 		} else if (diff == 3) {
-			count_3++;
+			++count_3;
 		}
 
 		joltage = value;

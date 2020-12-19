@@ -97,14 +97,14 @@ int main() {
 						const Validator& validator_func = validator->second;
 						const std::string value = s.substr(4, s.size() - 4);
 						if (validator_func(value)) {
-							passport_num_valid++;
+							++passport_num_valid;
 						}
 					}
 				});
 		}
 
 		if (passport_num_valid == kValidators.size()) {
-			num_valid++;
+			++num_valid;
 		}
 	}
 

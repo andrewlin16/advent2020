@@ -51,7 +51,7 @@ int main() {
 						cols);
 					if (adjacents == 0) {
 						cell = '#';
-						occupied++;
+						++occupied;
 						mod = true;
 					}
 				} else if (cell == '#') {
@@ -59,7 +59,7 @@ int main() {
 						cols);
 					if (adjacents >= 4) {
 						cell = 'L';
-						occupied--;
+						--occupied;
 						mod = true;
 					}
 				}

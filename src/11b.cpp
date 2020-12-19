@@ -44,7 +44,7 @@ int GetAdjacents(const std::vector<std::string>& grid, const int r,
 		while (InBounds(y, x, rows, cols)) {
 			const char cell = grid[y][x];
 			if (cell == '#') {
-				adjacents++;
+				++adjacents;
 				break;
 			} else if (cell == 'L') {
 				break;
@@ -79,7 +79,7 @@ int main() {
 						input_copy, y, x, rows, cols);
 					if (adjacents == 0) {
 						cell = '#';
-						occupied++;
+						++occupied;
 						mod = true;
 					}
 				} else if (cell == '#') {
@@ -87,7 +87,7 @@ int main() {
 						input_copy, y, x, rows, cols);
 					if (adjacents >= 5) {
 						cell = 'L';
-						occupied--;
+						--occupied;
 						mod = true;
 					}
 				}

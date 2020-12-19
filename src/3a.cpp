@@ -12,7 +12,7 @@ int main() {
 	int trees = 0;
 	for (const std::string& row : input) {
 		if (row[col] == '#') {
-			trees++;
+			++trees;
 		}
 		col = (col + 3) % width;
 	}

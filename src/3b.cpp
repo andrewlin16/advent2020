@@ -20,7 +20,7 @@ struct Tracker {
 	void Tick(const std::string& map_row) {
 		if (row == 0) {
 			if (map_row[col] == '#') {
-				trees++;
+				++trees;
 			}
 			col = (col + x_inc) % width;
 		}

@@ -40,7 +40,7 @@ int main() {
 		}
 
 		if (IsValid(passport)) {
-			num_valid++;
+			++num_valid;
 		}
 	}
 
