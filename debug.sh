@@ -12,6 +12,6 @@ binfile="$(mktemp)"
 
 grep -q "#include <util.h>" "${srcfile}" && utilargs="-Isrc src/util.cpp" || utilargs=""
 
-g++ -Og -Wall -std=c++20 -g ${utilargs} "${srcfile}" -o "${binfile}"
+g++ -Wall -std=c++20 -g ${utilargs} "${srcfile}" -o "${binfile}"
 gdb "${binfile}"
 rm "${binfile}"
