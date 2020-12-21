@@ -1,7 +1,8 @@
-#include <algorithm>
 #include <iostream>
-#include <iterator>
+#include <string>
 #include <unordered_map>
+
+#include <util.h>
 
 class History {
 public:
@@ -39,18 +40,20 @@ int UpdateHistory(std::unordered_map<int, History>& history, const int num,
 }
 
 int main() {
-	std::istream_iterator<int> input_iter(std::cin), input_end;
+	std::string input;
+	std::getline(std::cin, input);
+	const std::vector<int> numbers = util::ParseVectorString<int>(
+		input, ',', [](const std::string& str) {
+			return std::stoi(str);
+		});
+
 	std::unordered_map<int, History> history;
-
-	int turn = 1;
-	int last_number = 0;
-
-	for (; input_iter != input_end; ++input_iter, ++turn) {
-		last_number = *input_iter;
-		UpdateHistory(history, last_number, turn);
+	for (size_t i = 0; i < numbers.size(); ++i) {
+		UpdateHistory(history, numbers[i], i + 1);
 	}
 
-	for (; turn <= 30000000; ++turn) {
+	int last_number = numbers.back();
+	for (int turn = numbers.size() + 1; turn <= 30000000; ++turn) {
 		last_number = UpdateHistory(history, last_number, turn);
 	}
 

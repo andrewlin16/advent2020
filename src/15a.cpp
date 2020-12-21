@@ -1,11 +1,17 @@
 #include <algorithm>
 #include <iostream>
-#include <iterator>
+#include <string>
 #include <vector>
 
+#include <util.h>
+
 int main() {
-	std::istream_iterator<int> input_begin(std::cin), input_end;
-	std::vector<int> numbers(input_begin, input_end);
+	std::string input;
+	std::getline(std::cin, input);
+	std::vector<int> numbers = util::ParseVectorString<int>(
+		input, ',', [](const std::string& str) {
+			return std::stoi(str);
+		});
 
 	while (numbers.size() < 2020) {
 		const int last_spoken = numbers.back();
