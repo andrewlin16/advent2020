@@ -3,26 +3,18 @@
 #include <string>
 #include <vector>
 
+#include <util.h>
+
 std::vector<int> ParseSchedule(const std::string& schedule) {
 	std::vector<int> bus_ids;
 
-	size_t index = 0;
-	bool eol = false;
-	while (!eol) {
-		size_t comma_index = schedule.find(',', index);
-		if (comma_index == std::string::npos) {
-			comma_index = schedule.size();
-			eol = true;
-		}
-
-		const std::string token = schedule.substr(index, comma_index - index);
-		if (token[0] != 'x') {
-			const int id = std::stoi(token);
-			bus_ids.push_back(id);
-		}
-
-		index = comma_index + 1;
-	}
+	util::Tokenize(
+		schedule, ',', [&bus_ids](const std::string token, const int index) {
+			if (token[0] != 'x') {
+				const int id = std::stoi(token);
+				bus_ids.push_back(id);
+			}
+		});
 
 	return bus_ids;
 }

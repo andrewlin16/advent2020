@@ -5,6 +5,8 @@
 #include <vector>
 #include <utility>
 
+#include <util.h>
+
 struct Bus {
 	int id;
 	int offset;
@@ -13,31 +15,17 @@ struct Bus {
 std::vector<Bus> ParseSchedule(const std::string& schedule) {
 	std::vector<Bus> buses;
 
-	size_t str_index = 0;
-	int iterations = 0;
-	bool eol = false;
-
-	while (!eol) {
-		size_t comma_index = schedule.find(',', str_index);
-		if (comma_index == std::string::npos) {
-			comma_index = schedule.size();
-			eol = true;
-		}
-
-		const std::string token = schedule.substr(
-			str_index, comma_index - str_index);
-		if (token[0] != 'x') {
-			const int id = std::stoi(token);
-			int offset = (id - iterations) % id;
-			if (offset < 0) {
-				offset += id;
+	util::Tokenize(
+		schedule, ',', [&buses](const std::string token, const int index) {
+			if (token[0] != 'x') {
+				const int id = std::stoi(token);
+				int offset = (id - index) % id;
+				if (offset < 0) {
+					offset += id;
+				}
+				buses.emplace_back(id, offset);
 			}
-			buses.emplace_back(id, offset);
-		}
-
-		str_index = comma_index + 1;
-		++iterations;
-	}
+		});
 
 	return buses;
 }
