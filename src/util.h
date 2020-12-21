@@ -10,7 +10,7 @@ namespace util {
 const std::vector<std::string> ReadInput();
 const std::vector<std::vector<std::string>> ReadInputGroups();
 void Tokenize(const std::string&, const char,
-	const std::function<void(std::string, int)>);
+	const std::function<void(const std::string&, int)>&);
 
 }
 

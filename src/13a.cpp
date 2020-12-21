@@ -9,7 +9,7 @@ std::vector<int> ParseSchedule(const std::string& schedule) {
 	std::vector<int> bus_ids;
 
 	util::Tokenize(
-		schedule, ',', [&bus_ids](const std::string token, const int index) {
+		schedule, ',', [&bus_ids](const std::string& token, const int index) {
 			if (token[0] != 'x') {
 				const int id = std::stoi(token);
 				bus_ids.push_back(id);

@@ -16,7 +16,7 @@ std::vector<Bus> ParseSchedule(const std::string& schedule) {
 	std::vector<Bus> buses;
 
 	util::Tokenize(
-		schedule, ',', [&buses](const std::string token, const int index) {
+		schedule, ',', [&buses](const std::string& token, const int index) {
 			if (token[0] != 'x') {
 				const int id = std::stoi(token);
 				int offset = (id - index) % id;

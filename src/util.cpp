@@ -36,7 +36,7 @@ const std::vector<std::vector<std::string>> ReadInputGroups() {
 
 void Tokenize(
 		const std::string& str, const char token,
-		const std::function<void(std::string, int)> visit_func) {
+		const std::function<void(const std::string&, int)>& visit_func) {
 	size_t index = 0;
 	int iterations = 0;
 	bool eol = false;
