@@ -54,4 +54,14 @@ void Tokenize(
 	}
 }
 
+std::vector<int> ParseIntList(const std::string& str) {
+	std::vector<int> result;
+
+	Tokenize(str, ',', [&result](const std::string& str, const int index) {
+		result.push_back(std::stoi(str));
+	});
+
+	return result;
+}
+
 }

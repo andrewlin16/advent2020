@@ -8,10 +8,7 @@
 int main() {
 	std::string input;
 	std::getline(std::cin, input);
-	std::vector<int> numbers = util::ParseVectorString<int>(
-		input, ',', [](const std::string& str) {
-			return std::stoi(str);
-		});
+	std::vector<int> numbers = util::ParseIntList(input);
 
 	while (numbers.size() < 2020) {
 		const int last_spoken = numbers.back();

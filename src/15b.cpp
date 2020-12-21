@@ -42,10 +42,7 @@ int UpdateHistory(std::unordered_map<int, History>& history, const int num,
 int main() {
 	std::string input;
 	std::getline(std::cin, input);
-	const std::vector<int> numbers = util::ParseVectorString<int>(
-		input, ',', [](const std::string& str) {
-			return std::stoi(str);
-		});
+	const std::vector<int> numbers = util::ParseIntList(input);
 
 	std::unordered_map<int, History> history;
 	for (size_t i = 0; i < numbers.size(); ++i) {
