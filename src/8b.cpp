@@ -37,18 +37,6 @@ State CalculateState(const Instruction& inst, const State state, bool flip) {
 	}
 }
 
-char str(bool a) {
-	return a ? '1' : '0';
-}
-
-std::string str(std::vector<bool> a) {
-	std::string result;
-	for (const bool b : a) {
-		result.push_back(str(b));
-	}
-	return result;
-}
-
 std::optional<int> ExecuteProgram(
 		const std::vector<Instruction>& program, const State state,
 		std::vector<bool> visited, bool flipped) {
