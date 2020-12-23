@@ -14,7 +14,7 @@
 using Validator = std::function<bool(const std::string&)>;
 
 Validator year_validator(int lower, int upper) {
-	return [lower, upper](const std::string& s ) {
+	return [lower, upper](const std::string& s) {
 		const int year = std::stoi(s);
 		return year >= lower && year <= upper;
 	};
