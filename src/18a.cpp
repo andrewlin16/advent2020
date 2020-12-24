@@ -38,18 +38,15 @@ void PushValueAndMaybeFlatten(std::vector<Node>& stack, long value) {
 	// Top node should be operator by this point. Remove operator node as part
 	// of flattening.
 	stack.pop_back();
-	// Pop operand off of stack to flatten stack using operator.
-	const Node operand = stack.back();
-	stack.pop_back();
+	// Flatten new value into operand node on top of stack.
+	Node& operand = stack.back();
 
 	if (top.type == kPlusType) {
-		stack.emplace_back(value + operand.value);
+		operand.value += value;
 	} else if (top.type == kTimesType) {
-		stack.emplace_back(value * operand.value);
+		operand.value *= value;
 	} else {
-		// Type is number, which from looking at the input shouldn't happen but
-		// let's support multi-digit numbers anyway...
-		stack.emplace_back(top.value * 10 + value);
+		std::cerr << "top node type was number for some reason" << std::endl;
 	}
 }
 
