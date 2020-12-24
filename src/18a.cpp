@@ -28,7 +28,7 @@ void PushValueAndMaybeFlatten(std::vector<Node>& stack, long value) {
 		return;
 	}
 
-	const Node& top = stack.back();
+	const Node top = stack.back();
 	if (top.type == kParenType) {
 		// Cannot flatten past open paren, just push value.
 		stack.emplace_back(value);
@@ -39,7 +39,7 @@ void PushValueAndMaybeFlatten(std::vector<Node>& stack, long value) {
 	// of flattening.
 	stack.pop_back();
 	// Pop operand off of stack to flatten stack using operator.
-	const Node& operand = stack.back();
+	const Node operand = stack.back();
 	stack.pop_back();
 
 	if (top.type == kPlusType) {
