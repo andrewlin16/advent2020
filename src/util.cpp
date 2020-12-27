@@ -30,7 +30,10 @@ const std::vector<std::vector<std::string>> ReadInputGroups() {
 		}
 	}
 
-	input.push_back(std::move(group));
+	if (!group.empty()) {
+		input.push_back(std::move(group));
+	}
+
 	return input;
 }
 
