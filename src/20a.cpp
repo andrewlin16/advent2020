@@ -144,7 +144,7 @@ public:
 		}
 	}
 
-	const int GetId() const {
+	int GetId() const {
 		return id;
 	}
 
