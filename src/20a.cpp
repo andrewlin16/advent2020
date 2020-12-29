@@ -36,12 +36,12 @@ constexpr T GetRoot(T n) {
 enum Orientation {
 	kCwTL = 0,
 	kCwTR = 1,
-	kCwBL = 2,
-	kCwBR = 3,
+	kCwBR = 2,
+	kCwBL = 3,
 	kCcwTL = 4,
 	kCcwTR = 5,
-	kCcwBL = 6,
-	kCcwBR = 7,
+	kCcwBR = 6,
+	kCcwBL = 7,
 };
 
 struct EdgeOrientation {
