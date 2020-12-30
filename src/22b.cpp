@@ -8,8 +8,8 @@
 
 #include <util.h>
 
-using Deck = std::vector<int>;
-using HistoryEntry = std::pair<std::vector<int>, std::vector<int>>;
+using Deck = std::vector<char>;
+using HistoryEntry = std::pair<std::vector<char>, std::vector<char>>;
 
 // Based on https://stackoverflow.com/a/27216842, which seems to be based on
 // Boost libraries.
@@ -18,9 +18,9 @@ size_t HashCombine(const size_t seed, const T value) {
 	return seed ^ (value + 0x9e3779b9 + (seed << 6) + (seed >> 2));
 }
 
-size_t VectorHash(const std::vector<int>& v) {
+size_t VectorHash(const std::vector<char>& v) {
 	size_t seed = v.size();
-	for (const int i : v) {
+	for (const char i : v) {
 		seed = HashCombine(seed, i);
 	}
 	return seed;
@@ -62,8 +62,8 @@ bool PlayGame(Deck& deck1, Deck& deck2) {
 			return true;
 		}
 
-		const int top_deck1 = deck1.front();
-		const int top_deck2 = deck2.front();
+		const char top_deck1 = deck1.front();
+		const char top_deck2 = deck2.front();
 		const bool p1_winner = P1Won(deck1, deck2);
 
 		history.insert(std::move(entry));
