@@ -2,15 +2,37 @@
 #include <functional>
 #include <iostream>
 #include <iterator>
-#include <set>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include <util.h>
 
 using Deck = std::vector<int>;
 using HistoryEntry = std::pair<std::vector<int>, std::vector<int>>;
-using History = std::set<HistoryEntry>;
+
+// Based on https://stackoverflow.com/a/27216842, which seems to be based on
+// Boost libraries.
+template<typename T>
+size_t HashCombine(const size_t seed, const T value) {
+	return seed ^ (value + 0x9e3779b9 + (seed << 6) + (seed >> 2));
+}
+
+size_t VectorHash(const std::vector<int>& v) {
+	size_t seed = v.size();
+	for (const int i : v) {
+		seed = HashCombine(seed, i);
+	}
+	return seed;
+}
+
+struct HistoryEntryHash {
+	size_t operator()(const HistoryEntry& v) const {
+		return HashCombine(VectorHash(v.first), VectorHash(v.second));
+	}
+};
+
+using History = std::unordered_set<HistoryEntry, HistoryEntryHash>;
 
 int stoi(const std::string& a) {
 	return std::stoi(a);
