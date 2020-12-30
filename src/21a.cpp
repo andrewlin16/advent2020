@@ -40,7 +40,7 @@ void TryPruneAllergenSets(AllergenMap& map, const std::string& allergen) {
 		const std::string prune = std::move(prune_set.back());
 		prune_set.pop_back();
 
-		const IngredientSet& set = map.at(allergen);
+		const IngredientSet& set = map.at(prune);
 		if (set.size() != 1) {
 			continue;
 		}
