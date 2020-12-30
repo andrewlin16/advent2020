@@ -8,8 +8,8 @@
 
 #include <util.h>
 
-using Deck = std::vector<char>;
-using HistoryEntry = std::pair<std::vector<char>, std::vector<char>>;
+using Deck = std::string;
+using HistoryEntry = std::pair<std::string, std::string>;
 
 // Based on https://stackoverflow.com/a/27216842, which seems to be based on
 // Boost libraries.
@@ -18,17 +18,10 @@ size_t HashCombine(const size_t seed, const T value) {
 	return seed ^ (value + 0x9e3779b9 + (seed << 6) + (seed >> 2));
 }
 
-size_t VectorHash(const std::vector<char>& v) {
-	size_t seed = v.size();
-	for (const char i : v) {
-		seed = HashCombine(seed, i);
-	}
-	return seed;
-}
-
 struct HistoryEntryHash {
 	size_t operator()(const HistoryEntry& v) const {
-		return HashCombine(VectorHash(v.first), VectorHash(v.second));
+		return HashCombine(std::hash<std::string>{}(v.first),
+			std::hash<std::string>{}(v.second));
 	}
 };
 
