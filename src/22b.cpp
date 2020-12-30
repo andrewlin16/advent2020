@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <deque>
 #include <functional>
 #include <iostream>
 #include <iterator>
@@ -9,7 +8,7 @@
 
 #include <util.h>
 
-using Deck = std::deque<int>;
+using Deck = std::vector<int>;
 using HistoryEntry = std::pair<std::vector<int>, std::vector<int>>;
 using History = std::set<HistoryEntry>;
 
@@ -36,10 +35,7 @@ bool PlayGame(Deck& deck1, Deck& deck2) {
 	History history;
 
 	while (!deck1.empty() && !deck2.empty()) {
-		HistoryEntry entry = {
-			std::vector<int>(deck1.begin(), deck1.end()),
-			std::vector<int>(deck2.begin(), deck2.end()),
-		};
+		HistoryEntry entry = {deck1, deck2};
 		if (history.contains(entry)) {
 			return true;
 		}
@@ -49,8 +45,8 @@ bool PlayGame(Deck& deck1, Deck& deck2) {
 		const bool p1_winner = P1Won(deck1, deck2);
 
 		history.insert(std::move(entry));
-		deck1.pop_front();
-		deck2.pop_front();
+		deck1.erase(deck1.begin());
+		deck2.erase(deck2.begin());
 
 		if (p1_winner) {
 			deck1.insert(deck1.end(), {top_deck1, top_deck2});
