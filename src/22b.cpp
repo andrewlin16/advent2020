@@ -34,7 +34,7 @@ struct HistoryEntryHash {
 
 using History = std::unordered_set<HistoryEntry, HistoryEntryHash>;
 
-int stoi(const std::string& a) {
+char stoi(const std::string& a) {
 	return std::stoi(a);
 }
 
