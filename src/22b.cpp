@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <functional>
 #include <iostream>
 #include <iterator>
 #include <string>
@@ -10,22 +9,8 @@
 
 using Deck = std::string;
 using HistoryEntry = std::pair<std::string, std::string>;
-
-// Based on https://stackoverflow.com/a/27216842, which seems to be based on
-// Boost libraries.
-template<typename T>
-size_t HashCombine(const size_t seed, const T value) {
-	return seed ^ (value + 0x9e3779b9 + (seed << 6) + (seed >> 2));
-}
-
-struct HistoryEntryHash {
-	size_t operator()(const HistoryEntry& v) const {
-		return HashCombine(std::hash<std::string>{}(v.first),
-			std::hash<std::string>{}(v.second));
-	}
-};
-
-using History = std::unordered_set<HistoryEntry, HistoryEntryHash>;
+using History = std::unordered_set<
+	HistoryEntry, util::PairHash<std::string, std::string>>;
 
 char stoi(const std::string& a) {
 	return std::stoi(a);

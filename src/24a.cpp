@@ -7,18 +7,7 @@
 #include <util.h>
 
 using Coordinate = std::pair<int, int>;
-
-struct CoordinateHash {
-	size_t operator()(const Coordinate& v) const {
-		const size_t x = static_cast<size_t>(v.first);
-		const size_t y = static_cast<size_t>(v.second);
-		// Based on https://stackoverflow.com/a/27216842, which seems to be
-		// based on Boost libraries.
-		return x ^ (y + 0x9e3779b9 + (x << 6) + (x >> 2));
-	}
-};
-
-using CoordinateSet = std::unordered_set<Coordinate, CoordinateHash>;
+using CoordinateSet = std::unordered_set<Coordinate, util::PairHash<int, int>>;
 
 void FlipCoordinate(CoordinateSet& set, const Coordinate c) {
 	const auto iter = set.find(c);
