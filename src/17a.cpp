@@ -1,14 +1,15 @@
 #include <array>
 #include <iostream>
-#include <set>
 #include <string>
 #include <tuple>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 
 #include <util.h>
 
 using Cell = std::tuple<int, int, int>;
+using CellSet = std::unordered_set<Cell, util::TupleHash<int, int, int>>;
 using Neighbors = std::array<Cell, 26>;
 
 Neighbors GetNeighbors(const Cell& cell) {
@@ -32,7 +33,7 @@ Neighbors GetNeighbors(const Cell& cell) {
 
 int main() {
 	const std::vector<std::string> input = util::ReadInput();
-	std::set<Cell> state;
+	CellSet state;
 
 	const size_t rows = input.size();
 	for (size_t r = 0; r < rows; ++r) {
@@ -46,7 +47,7 @@ int main() {
 	}
 
 	for (int i = 0; i < 6; ++i) {
-		std::set<Cell> new_state(state);
+		CellSet new_state(state);
 		for (const Cell& cell : state) {
 			const Neighbors neighbors = GetNeighbors(cell);
 			new_state.insert(neighbors.begin(), neighbors.end());
