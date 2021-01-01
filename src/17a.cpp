@@ -1,3 +1,4 @@
+#include <array>
 #include <iostream>
 #include <set>
 #include <string>
@@ -8,17 +9,19 @@
 #include <util.h>
 
 using Cell = std::tuple<int, int, int>;
+using Neighbors = std::array<Cell, 26>;
 
-std::vector<Cell> GetNeighbors(const Cell& cell) {
+Neighbors GetNeighbors(const Cell& cell) {
 	const auto [x, y, z] = cell;
-	std::vector<Cell> neighbors;
-	neighbors.reserve(26);
+	Neighbors neighbors;
+	int index = 0;
 
 	for (int dx = -1; dx <= 1; ++dx) {
 		for (int dy = -1; dy <= 1; ++dy) {
 			for (int dz = -1; dz <= 1; ++dz) {
 				if (dx != 0 || dy != 0 || dz != 0) {
-					neighbors.emplace_back(x + dx, y + dy, z + dz);
+					neighbors[index] = {x + dx, y + dy, z + dz};
+					++index;
 				}
 			}
 		}
@@ -45,7 +48,7 @@ int main() {
 	for (int i = 0; i < 6; ++i) {
 		std::set<Cell> new_state(state);
 		for (const Cell& cell : state) {
-			const std::vector<Cell> neighbors = GetNeighbors(cell);
+			const Neighbors neighbors = GetNeighbors(cell);
 			new_state.insert(neighbors.begin(), neighbors.end());
 		}
 
@@ -53,7 +56,7 @@ int main() {
 		while (iter != new_state.end()) {
 			const Cell& cell = *iter;
 
-			const std::vector<Cell> neighbors = GetNeighbors(cell);
+			const Neighbors neighbors = GetNeighbors(cell);
 			int num_neighbors = std::count_if(
 				neighbors.begin(), neighbors.end(), [&state](const Cell& n) {
 					return state.contains(n);
